@@ -1,0 +1,9 @@
+rm -f *.hex *.lst *.map *.elf *.o
+avr-gcc -c -g -Os -fno-inline-small-functions -fno-split-wide-types -fno-tree-scev-cprop -Wall -Wno-main -mmcu=atmega328p -I. -DF_CPU=16000000 -D__AVR_ATmega328__ -DBOOTADDR=0x3E00 main.c -o main.o
+avr-gcc -Wl,--section-start=.text=0x3E00,--relax -mmcu=atmega328p -nodefaultlibs -nostartfiles -Wl,-Map,main.elf.map -o main.elf main.o
+avr-objdump --source -d main.elf > main.elf.lst
+avr-size --common -d main.elf
+   text	   data	    bss	    dec	    hex	filename
+     24	      0	      0	     24	     18	main.elf
+avr-objcopy -j .text -O ihex main.elf main.hex
+rm main.elf main.o
