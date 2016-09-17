@@ -33,6 +33,6 @@ For example, atmega328 datasheet specifies bootloader address for 512-word size 
 ### Limitations
 
 *   No EEPROM support
-*   Hex address in skipped. Bootloader assumes that hex file has sequential addressing starting from 0x0000 (which is what your toolchain would produce anyway).
-*   No consistency check. Although CRC for each packet is checked, there is no feature to determine if the complete firmware was written properly.
+*   Hex address is ignored. Bootloader assumes that hex file has sequential addressing starting from 0x0000 (which is what your toolchain would produce anyway)
+*   Firmware consistency is not checked during boot
 
